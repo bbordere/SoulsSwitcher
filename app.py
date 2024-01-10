@@ -255,13 +255,14 @@ class App:
 		ctypes.windll.user32.keybd_event(0x5B, 0, 2, 0)
 
 # Wrapper for more convenient way to handle all process
-def handlingProcess(mode: str, games: dict, app: App) -> None:
+def handlingProcess(mode: str, games: dict, app: App, isCritical: bool = True) -> None:
 	for game in games:
 		try:
 			games[game].proc.resume() if mode == "resume" else games[game].proc.suspend()
 		except:
 			app.events["badPermissions"].set()
-			return
+			if (isCritical):
+				return
 
 def switcherLogic(app: App, isInfiniteLoop: bool, loopCounter: int, timeRange: tuple) -> None:
 	global isRunning
@@ -293,31 +294,37 @@ def switcherLogic(app: App, isInfiniteLoop: bool, loopCounter: int, timeRange: t
 	while isRunning and (isInfiniteLoop or loop < loopCounter):
 		if (not isInfiniteLoop):
 			loop += 1
-		# Choose a random game from the selection
-		exec = app.chooseGame(lastExec)
-		gamechoice =  app.windowsName[app.execsName.index(exec)]
+		try:
+			# Choose a random game from the selection
+			exec = app.chooseGame(lastExec)
+			gamechoice =  app.windowsName[app.execsName.index(exec)]
 
-		# Resume the chosen game process
-		app.games[gamechoice].proc.resume()
+			# Resume the chosen game process
+			app.games[gamechoice].proc.resume()
 
-		# Suspend the last game process
-		if len(lastGame):
-			app.games[lastGame].proc.suspend()
-	
-		# Execute shortcut while the current window isn't the chose game
-		while (pyautogui.getActiveWindow().title != gamechoice):
-			app.pressKeys(app.windowsName.index(gamechoice))
-			time.sleep(.05)
+			# Suspend the last game process
+			if len(lastGame):
+				app.games[lastGame].proc.suspend()
+		
+			# Execute shortcut while the current window isn't the chose game
+			while (pyautogui.getActiveWindow().title != gamechoice):
+				app.pressKeys(app.windowsName.index(gamechoice))
+				time.sleep(.05)
 
-		app.events["changeTitle"].set()
-		lastGame = gamechoice
-		lastExec = exec
+			app.events["changeTitle"].set()
+			lastGame = gamechoice
+			lastExec = exec
 
-		# Sleep for a random time to play
-		time.sleep(random.randint(timeRange[0], timeRange[1]))
+			if timeRange[0] >= timeRange[1]:
+				timeRange[0], timeRange[1] = timeRange[1], timeRange[0]
+			# Sleep for a random time to play
+			time.sleep(random.randint(timeRange[0], timeRange[1]))
+		except:
+			break
+			
 
 	# At the end resume all processes
-	handlingProcess("resume", app.games, app)
+	handlingProcess("resume", app.games, app, False)
 	if (loop >= loopCounter):
 		app.events["endLoop"].set()
 		return
