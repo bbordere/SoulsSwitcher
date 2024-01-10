@@ -315,10 +315,14 @@ def switcherLogic(app: App, isInfiniteLoop: bool, loopCounter: int, timeRange: t
 			lastGame = gamechoice
 			lastExec = exec
 
-			if timeRange[0] >= timeRange[1]:
-				timeRange[0], timeRange[1] = timeRange[1], timeRange[0]
 			# Sleep for a random time to play
-			time.sleep(random.randint(timeRange[0], timeRange[1]))
+			if timeRange[0] > timeRange[1]:
+				time.sleep(random.randint(timeRange[1], timeRange[0]))
+			elif timeRange[0] == timeRange[1]:
+				time.sleep(random.randint(timeRange[0], timeRange[1] + 1))
+			else:
+				time.sleep(random.randint(timeRange[0], timeRange[1]))
+				
 		except:
 			break
 			
