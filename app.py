@@ -277,6 +277,7 @@ def switcherLogic(app: App, isInfiniteLoop: bool, loopCounter: int, timeRange: t
 					app.games[app.windowsName[index]] = Game(app.windowsName[index], proc.info['name'], proc)
 	
 	# Securities for correct process handling
+	games = []
 	if (app.games):
 		games = [game.execName for game in app.games.values()]
 	if not len(app.games) or len(app.gamesList) != len(app.games):
