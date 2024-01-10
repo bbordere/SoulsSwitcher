@@ -1,5 +1,5 @@
 # Souls Switcher
-This little python script lets you play several From Software games in random order. Every X seconds, the game will change randomly. For the moment, it only works for Dark Souls Remastered, Dark Souls 2 (Scholar of the First Sin), Darl Souls 3, Sekiro and Elden Ring.<br><br>
+This little python script lets you play several From Software games in random order. Every X seconds, the game will change randomly. For the moment, it only works for Dark Souls Remastered, Dark Souls 2 (Scholar of the First Sin), Dark Souls 3, Sekiro and Elden Ring.<br><br>
 ![image (1)](https://github.com/bbordere/SoulsSwitcher/assets/45495330/44ede203-95f6-4e82-bb8c-4dde78fa29bf)
 
 ## How to use it ?
@@ -31,4 +31,4 @@ If you don't have one of the games, you need to replace its location in the task
    ```
 ## Next Step
 It's simply a dirty little script that lets you switch games in a rather inconvenient way. 
-Many things could be improved to make this project more user-friendly, such as the ability to choose games directly via the GUI by selecting a window.As it is, it simply serves as a POC for a funny idea.
+Many things could be improved to make this project more user-friendly, such as the ability to choose games directly via the GUI by selecting a window.As it is, it simply serves as a proof of concept of funny idea.
