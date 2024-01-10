@@ -66,6 +66,7 @@ class App:
 
 	def initWindow(self):
 		self.window = tk.Tk()
+		self.window.iconbitmap("icon.ico")
 		self.window.resizable(width=False, height=False)
 		self.window.title("Souls Switcher")
 		self.window.geometry("500x350")
@@ -131,7 +132,7 @@ class App:
 		self.frames["status"].pack_propagate(0)
 
 	def initCurrentGameStatus(self):
-		self.vars["currentGame"].set("DARK SOULS™: REMASTERED")
+		self.vars["currentGame"].set("Undefined")
 		currentGameFrame = tk.Frame(self.frames["right"], width=200, height=40, borderwidth=0, relief=tk.GROOVE)
 		tk.Label(currentGameFrame, text="Current Game:", font=('Helvetica', 10)).pack(pady=5, side=tk.LEFT)
 		currentGameLabel = tk.Label(currentGameFrame, textvariable=self.vars["currentGame"], font=('Helvetica', 10), fg='blue')
