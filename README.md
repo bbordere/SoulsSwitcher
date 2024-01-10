@@ -21,8 +21,9 @@ This little python script lets you play several From Software games in random or
     - Sekiro
     - Elden Ring
      <br><br>
-  Without this precise sequence, the program **will not** run correctly. You must pin the executables to prevent Windows from changing their order.
+Without this precise sequence, the program **WILL NOT** run correctly. You must pin the executables to prevent Windows from changing their order.
 If you don't have one of the games, you need to replace its location in the taskbar with another executable of your choice (e.g. Google Chrome).
+For some reasons, you need to run Elden Ring without anticheat for it to work.
 
 3) Run
    ```shell
