@@ -283,7 +283,7 @@ def switcherLogic(app: App, isInfiniteLoop: bool, loopCounter: int, timeRange: t
 	if not len(app.games) or len(app.gamesList) != len(app.games):
 		app.events["badProc"].set()
 		return
-	if (games != app.gamesList):
+	if (set(games) != set(app.gamesList)):
 		app.events["badProc"].set()
 		return
 
